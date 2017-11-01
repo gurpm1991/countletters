@@ -1,33 +1,40 @@
 var input = String(process.argv.slice(2));
-//console.log(input);
 var input = input.replace(/\,*\s*/ig, '').split('');
+var letterPosition = {};
 
 
-var letterCount = {};
+function countLetters (input, letterPosition){
+	for (var i = 0; i < input.length; i++){
+		var word = input[i].toLowerCase();
+	
+		if (input[i] in letterPosition){
+ 			letterPosition[word]['count'] += 1;
+			letterPosition[word]['position'].push(i);
 
+		} else {
+			letterPosition[word] = {};
+ 			letterPosition[word]['count'] = 1;
+			letterPosition[word]['position'] = [i];
 
-
-function countLetters(input, letterCount){
-	for (var i = 0; i < input.length; i++) {
-		var word = input[i].toLowerCase()
-		
-		if (input[i] in letterCount){
-			letterCount[word]['count'] += 1;
-			letterCount[word]['position'].push(i);
-		 } else {
-			letterCount[word] = {};
-			letterCount[word]['count'] = 1;
-			letterCount[word]['position'] = [i];
-
-		}
-		
+		} 
 	}
-	return letterCount
-}
+	return letterPosition;
+};
+
+
+
+console.log (countLetters (input, letterPosition));
 
 
 
 
-console.log (countLetters (input, letterCount));
 
-//console.log(typeof countLetters (input, letterCount));
+
+
+
+
+
+
+
+
+
